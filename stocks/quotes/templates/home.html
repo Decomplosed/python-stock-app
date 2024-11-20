@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {{ api }}
+    {% if api %}
+        {% if api == "Error..." %}
+            <p>There was a problem with your ticker symbol. Please try again...</p>
+        {% else %}
+            {% for key, value in api.data.0.items %}
+                {{ key }}: {{ value }}</br>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 {% endblock  %}
