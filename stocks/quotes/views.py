@@ -4,10 +4,17 @@ import json
 import os
 
 def home(request):
-	api_request = requests.get(f"https://api.finazon.io/latest/finazon/us_stocks_essential/tickers?ticker=AAPL&apikey={os.getenv('API_KEY')}")
+	api_key = os.getenv('API_KEY')
+	ticker_request = requests.get(f"https://api.finazon.io/latest/finazon/us_stocks_essential/tickers?ticker=AAPL&apikey={api_key}")
+	ticker_price_request = requests.get(f"https://api.finazon.io/latest/finazon/us_stocks_essential/price?ticker=AAPL&apikey={api_key}")
 
 	try:
-		api = json.loads(api_request.content)
+		ticker_data = json.loads(ticker_request.content)
+		ticker_price = json.loads(ticker_price_request.content)
+		api = {
+			"ticker_data": ticker_data,
+			"ticker_price": ticker_price
+		}
 	except Exception as e:
 		api = "Error..."
 

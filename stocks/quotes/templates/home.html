@@ -5,9 +5,14 @@
         {% if api == "Error..." %}
             <p>There was a problem with your ticker symbol. Please try again...</p>
         {% else %}
-            {% for key, value in api.data.0.items %}
+            <h1>{{ api.ticker_data.data.0.security }}</h1></br>
+            Ticker: {{ api.ticker_data.data.0.ticker }}</br>
+            Price: {{ api.ticker_price.p }} {{ api.ticker_data.data.0.currency }}</br>
+            
+            
+            {% comment %} {% for key, value in api.data.0.items %}
                 {{ key }}: {{ value }}</br>
-            {% endfor %}
+            {% endfor %} {% endcomment %}
         {% endif %}
     {% endif %}
 {% endblock  %}
